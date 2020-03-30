@@ -1,7 +1,7 @@
 import os
 import sqlite3
 
-db_name = 'mastermind.db'
+db_name = 'MasterMind.db'
 path = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -30,8 +30,3 @@ class db_connection:
         conn.commit()
         conn.close()
 
-    @staticmethod
-    # destructor
-    def __del__(cls):
-        conn = sqlite3.connect(os.path.join(path, db_name))
-        conn.close()
