@@ -3,3 +3,5 @@ MasterMind/.idea/dataSources.xml
 MasterMind/__pycache__/Player.cpython-38.pyc
 MasterMind/__pycache__/db_connection.cpython-38.pyc
 MasterMind/__pycache__/App.cpython-38.pyc
+MasterMind/.idea/dataSources.xml
+*.xml
