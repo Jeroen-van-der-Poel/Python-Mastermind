@@ -2,10 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
     {% block head %}{% endblock %}
 </head>
 <body>
-    {% block body %}{% endblock %}
+    <nav>
+        <ul>
+            <li><a href="/game/">Game</a></li>
+            <li><a href="/statistics/">Statistieken</a></li>
+            {% if session.user %}
+                <li><a href="/logout/">Logout</a></li>
+            {% else %}
+                <li><a href="/login/">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <main>
+        {% block title %}{% endblock %}
+        {% block body %}{% endblock %}
+    </main>
 </body>
 </html>
