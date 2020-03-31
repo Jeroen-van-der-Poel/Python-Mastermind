@@ -17,11 +17,11 @@ def home():
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     if 'player' in session:
-        return render_template('game.html')
+        return render_template('gamestart.html')
     if request.method == 'POST':
         username = request.form['user']
         Player(username)
-        return render_template('game.html')
+        return render_template('gamestart.html')
     return render_template('login.html')
 
 @app.route('/logout/')
@@ -30,10 +30,10 @@ def logout():
         session.clear()
     return render_template('login.html')
 
-@app.route('/game/', methods=['GET', 'POST'])
+@app.route('/gamestart/', methods=['GET', 'POST'])
 def game():
     if 'player' in session:
-        return render_template('game.html')
+        return render_template('gamestart.html')
     return render_template('login.html')
 
 if __name__ == '__main__':
