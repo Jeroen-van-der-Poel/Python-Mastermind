@@ -1,5 +1,5 @@
 from flask import session
-
+from Game import Game
 from db_connection import db_connection
 
 
@@ -12,3 +12,7 @@ class Player:
                 db_connection.query('INSERT INTO User VALUES(null, ?)', [username])
                 rows = db_connection.select_query('SELECT * FROM User WHERE username = ?', [username])
             session['id'] = rows[0][0]
+
+    @staticmethod
+    def begin_game():
+        return Game(session['player_id'], True)
