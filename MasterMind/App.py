@@ -21,7 +21,7 @@ def login():
     if request.method == 'POST':
         username = request.form['user']
         Player(username)
-        return redirect(url_for('game'))
+        return render_template('game.html')
     return render_template('login.html')
 
 if __name__ == '__main__':
