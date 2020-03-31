@@ -7,8 +7,8 @@ class Player:
     def __init__(self, username: str):
         if 'player' not in session:
             session['player'] = username
-            rows = db_connection.select_query('SELECT * FROM User WHERE name = ?', [username])
+            rows = db_connection.select_query('SELECT * FROM User WHERE username = ?', [username])
             if len(rows) == 0:
                 db_connection.query('INSERT INTO User VALUES(null, ?)', [username])
-                rows = db_connection.select_query('SELECT * FROM User WHERE name = ?', [username])
-            session['player_id'] = rows[0][0]
+                rows = db_connection.select_query('SELECT * FROM User WHERE username = ?', [username])
+            session['id'] = rows[0][0]

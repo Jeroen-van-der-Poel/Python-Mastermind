@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="MasterMind" uuid="b4a4d3ad-770a-4f12-8957-5328ed73deb6">
+    <data-source source="LOCAL" name="MasterMind.sqlite" uuid="5b9a1bda-6627-4021-b8cd-bf02be30854d">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:identifier.sqlite</jdbc-url>
+      <jdbc-url>jdbc:sqlite:D:\Github\Python-Mastermind\MasterMind\MasterMind.db</jdbc-url>
     </data-source>
   </component>
 </project>
