@@ -23,3 +23,6 @@ def login():
         Player(username)
         return redirect(url_for('profile'))
     return render_template('login.html')
+
+if __name__ == '__main__':
+    app.run()
