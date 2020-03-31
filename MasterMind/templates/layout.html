@@ -10,7 +10,7 @@
         <ul>
             <li><a href="/game/">Game</a></li>
             <li><a href="/statistics/">Statistieken</a></li>
-            {% if session.user %}
+            {% if session.player %}
                 <li><a href="/logout/">Logout</a></li>
             {% else %}
                 <li><a href="/login/">Login</a></li>
