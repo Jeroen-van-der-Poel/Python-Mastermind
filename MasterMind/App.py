@@ -24,17 +24,20 @@ def login():
         return render_template('gamestart.html')
     return render_template('login.html')
 
+
 @app.route('/logout/')
 def logout():
     if 'player' in session:
         session.clear()
     return render_template('login.html')
 
+
 @app.route('/gamestart/', methods=['GET', 'POST'])
 def game():
-    if 'player' in session:
+    if request.method == 'GET' and 'player' in session:
         return render_template('gamestart.html')
     return render_template('login.html')
+
 
 if __name__ == '__main__':
     app.run()
