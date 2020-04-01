@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block title %}{{ session['player'] }}{% endblock %}
+{% block content %}
+    <div>
+        <h2> Statistieken</h2>
+            <table style="text-align: left">
+                <tr>
+                    <td>Gemiddeld aantal beurten tot oplossing</td>
+                    <td>
+                        {{ d1 }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Aantal opgelosde spellen</td>
+                    <td>{{ d2 }}</td>
+                </tr>
+                <tr>
+                    <td>Aantal niet voltooide spellen</td>
+                    <td>{{ d3 }}</td>
+                </tr>
+                <tr>
+                    <td>Voor het laatst een spel begonnen op</td>
+                    <td>{{ d4 }}</td>
+                </tr>
+            </table>
+    </div>
+{% endblock %}

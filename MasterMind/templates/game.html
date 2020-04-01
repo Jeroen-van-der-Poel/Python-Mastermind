@@ -1,7 +1,65 @@
 {% extends "layout.html" %}
+{% block title %}{{ session['player'] }}{% endblock %}
+{% block content %}
+    {% if win %}
+        <style>
+            body {
+                background-image: url("https://lh3.googleusercontent.com/proxy/hPCK_ZUaFqwjsWOX7SjPDMSONTcvKNROBew39SaKclRO5HpgrwKYec1JZwB9zlvC_SEbw5w3Zc0hKpDt8Dj3UGYac7ySwKPvLrJjZvSYC_ZwVHkBCLC61XsyMUVaYQotqSLFFquGsHCPkIga")
+            }
+        </style>
+        <form method="post" action="/win/">
+            <button type="submit">Verder gaan</button>
+        </form>
+    {% endif %}
+    {% if not win %}
+        <div style="overflow-y: scroll; height:600px;">
+            <table>
+                <tr>
+                    {% for i in range(session['amount']) %}
+                        <td>
 
-{% block title %}<h1>Game</h1>{% endblock %}
-
-{% block body %}
-
+                        </td>
+                    {% endfor %}
+                    <td>
+                        Kleur zit in het antwoord
+                    </td>
+                    <td>
+                        Kleur staat op de juiste plaats
+                    </td>
+                </tr>
+                {% for i in session['tries'][::-1] %}
+                    <tr>
+                        {% for j in i[0] %}
+                            <td style="background-color: {{ j }}">
+                                <p></p>
+                            </td>
+                        {% endfor %}
+                        <td>
+                            <p>{{ i[1][0] }}</p>
+                        </td>
+                        <td>
+                            <p>{{ i[1][1] }}</p>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <form method="post" action="/game/">
+            <table>
+                <tr>
+                    {% for i in range(session['amount']) %}
+                        <td name="color{{ i }}">
+                            <select id="{{ i }}" name="{{ i }}">
+                                {% for i in range(session['color_amount']) %}
+                                    <option value="{{ Color(i).label }}"
+                                            style="color: {{ Color(i).label }}">{{ Color(i).name }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    {% endfor %}
+                </tr>
+            </table>
+            <button type="submit">Checken</button>
+        </form>
+    {% endif %}
 {% endblock %}
