@@ -30,9 +30,9 @@
                 {% for i in session['tries'][::-1] %}
                     <tr>
                         {% for j in i[0] %}
-                            <td style="background-color: {{ j }}">
+<!--                            <td style="background-color: {{ j }}">
                                 <p></p>
-                            </td>
+                            </td>-->
                         {% endfor %}
                         <td>
                             <p>{{ i[1][0] }}</p>
@@ -51,8 +51,9 @@
                         <td name="color{{ i }}">
                             <select id="{{ i }}" name="{{ i }}">
                                 {% for i in range(session['color_amount']) %}
-                                    <option value="{{ Color(i).label }}"
-                                            style="color: {{ Color(i).label }}">{{ Color(i).name }}</option>
+<!--                                    <option value="{{ Color(i).label }}" style="color: {{ Color(i).label }}">
+                                        {{ Color(i).name }}
+                                    </option>-->
                                 {% endfor %}
                             </select>
                         </td>

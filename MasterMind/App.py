@@ -54,7 +54,7 @@ def stats():
     if 'player' in session:
         d1 = db_connection.select_query('SELECT AVG(turns) FROM Game WHERE player_id = ? AND is_finished = true', [session['player_id']])[0][0]
         d2 = db_connection.select_query('SELECT COUNT(player_id) FROM Game WHERE player_id = ? AND is_finished = true', [session['player_id']])[0][0]
-        d3 = db_connection.select_query('SELECT COUNT(*) - (SELECT COUNT(player_id) FROM games WHERE player_id = ? '
+        d3 = db_connection.select_query('SELECT COUNT(*) - (SELECT COUNT(player_id) FROM Game WHERE player_id = ? '
                                         'AND is_finished = true) FROM Game WHERE player_id = ?', [session['player_id'], session['player_id']])[0][0]
         d4 = db_connection.select_query('SELECT created_at FROM Game WHERE player_id = ? order by '
                                         'created_at LIMIT 1', [session['player_id']])[0][0]
