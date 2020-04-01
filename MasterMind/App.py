@@ -2,6 +2,9 @@ import logging
 import os
 
 from flask import Flask, render_template, url_for, session, request, redirect
+
+from Colors import Color
+from Game import Game
 from Player import Player
 from db_connection import db_connection
 
@@ -36,6 +39,14 @@ def logout():
 def game():
     if request.method == 'GET' and 'player' in session:
         return render_template('gamestart.html')
+    if request.method == 'POST' and 'player' in session:
+        Game.clear_game()
+        Player.begin_game()
+        is_checked = request.form.get('doubles')
+        session['answer'] = Game.generate_game(int(request.form['amount']), int(request.form['color_amount']), is_checked)
+        if 'tries' not in session:
+            session['tries'] = []
+        return render_template('game.html', Color=Color)
     return render_template('login.html')
 
 @app.route('/statistics/')
