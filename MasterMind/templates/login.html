@@ -1,11 +1,27 @@
 {% extends "layout.html" %}
 
-{% block title %}<h1>Login</h1>{% endblock %}
+{% block title %}
+    <div class="container mt-5">
+        <div class="row d-flex justify-content-center">
+                <h1>Login</h1>
+        </div>
+    </div>
+{% endblock %}
 
 {% block body %}
-    <form method="post" action="/login/">
-        <label for="user">Username:</label>
-        <input type="text" name="user" placeholder="username" id="user">
-      <button type="submit">Login</button>
-    </form>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <form method="post" action="/login/">
+                <br>
+                <div class="row d-flex justify-content-center">
+                    <label for="user">Username:</label>
+                    <input type="text" name="user" placeholder="username" id="user">
+                </div>
+                <br>
+                <span class="row d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary" style="width: 100px;">Login</button>
+                </span>
+            </form>
+        </div>
+    </div>
 {% endblock %}
