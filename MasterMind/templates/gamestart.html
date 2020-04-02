@@ -3,39 +3,41 @@
 {% block title %}<h1>Nieuw spel beginnen</h1>{% endblock %}
 
 {% block body %}
-<div>
-        <form action="/gamestart/" method="post">
-            <table style="text-align: center">
-                <tr>
-                    <td>Aantal Kleuren</td>
-                    <td>Aantal Posities</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="range" name="color_amount" id="color_amount" value="6" min="6" max="10"
-                               oninput="color_amount_out.value = color_amount.value"></td>
-                    <td>
-                        <input type="range" name="amount" id="amount" value="6" min="4" max="10"
-                               oninput="amount_out.value = amount.value"></td>
-                </tr>
-                <tr>
-                    <td>
-                        <output name="color_amount_out" id="color_amount_out">6</output>
-                    </td>
-                    <td>
-                        <output name="amount_out" id="amount_out">6</output>
-                    </td>
-                </tr>
-            </table>
+    <form action="/gamestart/" method="post">
+        <div class="container">
+            <div class="row">
+                <table style="text-align: center">
+                    <tr>
+                        <td>Aantal Kleuren</td>
+                        <td>Aantal Posities</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="range" name="color_amount" id="color_amount" value="6" min="6" max="10"
+                                   oninput="color_amount_out.value = color_amount.value"></td>
+                        <td>
+                            <input type="range" name="amount" id="amount" value="6" min="4" max="10"
+                                   oninput="amount_out.value = amount.value"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <output name="color_amount_out" id="color_amount_out">6</output>
+                        </td>
+                        <td>
+                            <output name="amount_out" id="amount_out">6</output>
+                        </td>
+                    </tr>
+                </table>
 
-            <br>
+                <br>
 
-            <input type="checkbox" name="doubles"> Speel met dubbele kleuren
+                <input type="checkbox" name="doubles"> Speel met dubbele kleuren
 
-            <br>
-            <br>
+                <br>
+                <br>
 
-            <button type="submit" style="width: 100px">Begin</button>
-        </form>
-    </div>
+                <button type="submit" style="width: 100px">Begin</button>
+            </div>
+        </div>
+    </form>
 {% endblock %}

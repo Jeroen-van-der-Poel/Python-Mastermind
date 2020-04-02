@@ -40,7 +40,7 @@ def gamestart():
     if request.method == 'GET' and 'player' in session:
         return render_template('gamestart.html')
     if request.method == 'POST' and 'player' in session:
-        clear_game()
+        Game.clear_game()
         Player.begin_game()
         is_checked = request.form.get('doubles')
         session['answer'] = Game.generate_game(int(request.form['amount']), int(request.form['color_amount']), is_checked)
@@ -82,25 +82,6 @@ def stats():
                                         'created_at LIMIT 1', [session['player_id']])[0][0]
         return render_template('statistics.html', db_connection=db_connection, d1=d1, d2=d2, d3=d3, d4=d4)
     return render_template('login.html')
-
-
-def clear_game():
-    if 'answer' in session:
-        session.pop('answer')
-    if 'amount' in session:
-        session.pop('amount')
-    if 'color_amount' in session:
-        session.pop('color_amount')
-    if 'game_id' in session:
-        session.pop('game_id')
-    if 'colors' in session:
-        session.pop('colors')
-    if 'tries' in session:
-        session.pop('tries')
-    if 'win' in session:
-        session.pop('win')
-    if 'attempts' in session:
-        session.pop('attempts')
 
 if __name__ == '__main__':
     app.run()

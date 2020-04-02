@@ -44,6 +44,10 @@ table td, table th {
     min-width: 100px;
 }
 
+table tr{
+    align-content: center;
+}
+
 table tr:nth-child(even) {
     background-color: #f2f2f2;
 }
@@ -58,5 +62,13 @@ table th {
     text-align: left;
     background-color: #4CAF50;
     color: white;
+}
+
+.dot {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 1px solid black;
+    left: 50%;
 }
 
