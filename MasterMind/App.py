@@ -44,10 +44,10 @@ def gamestart():
         Player.begin_game()
         is_checked = request.form.get('doubles')
         cheat_on = request.form.get('cheat')
-        if cheat_on:
+        if(cheat_on):
             has_cheated = True
         session['answer'] = Game.generate_game(int(request.form['amount']), int(request.form['color_amount']), is_checked)
-        if has_cheated:
+        if(has_cheated):
             db_connection.query("UPDATE Game SET has_cheated = (?)" +
                                 "WHERE game_id = (?)", (True, session['game_id']))
         if 'tries' not in session:
