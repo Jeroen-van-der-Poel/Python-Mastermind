@@ -1,9 +1,14 @@
 {% extends "layout.html" %}
+    {% block title %}
+        <div class="container mt-5">
+            <div class="row d-flex justify-content-center">
+                <h1>Statistieken van {{ session['player'] }}</h1>
+            </div>
+        </div>
+    {% endblock %}
 {% block body %}
     <div class="container">
         <div class="row">
-
-            <h2> Statistieken van {{ session['player'] }}</h2>
 
                 <table style="text-align: left">
 
@@ -15,10 +20,10 @@
                     </tr>
 
                     <tr>
-                        <td>{{ d1 }}</td>
-                        <td>{{ d2 }}</td>
-                        <td>{{ d3 }}</td>
-                        <td>{{ d4 }}</td>
+                        <td>{{ d1 }}</td> <!--Average amount of turns to finishing-->
+                        <td>{{ d2 }}</td> <!--Amount of finished games-->
+                        <td>{{ d3 }}</td> <!--Amount of unfinished games-->
+                        <td>{{ d4 }}</td> <!--Last played game date-->
                     </tr>
 
                 </table>

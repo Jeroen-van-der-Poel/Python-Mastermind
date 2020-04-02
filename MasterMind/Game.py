@@ -55,15 +55,15 @@ class Game:
 
         for colors in this_try:
             if str(answer[i]) == str(colors):
-                correct_place -= -1
-                i -= -1
+                correct_place += 1
+                i += 1
                 continue
             if answer.__contains__(colors):
                 if not guessed_colors.__contains__(colors):
                     correct_color -= -1
                 guessed_colors.append(colors)
-            i -= -1
-            return correct_color, correct_place
+            i += 1
+        return correct_color, correct_place
 
     @staticmethod
     def clear_game():
