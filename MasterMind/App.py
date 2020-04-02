@@ -87,8 +87,8 @@ def stats():
         d4 = db_connection.select_query('SELECT created_at FROM Game WHERE player_id = ? order by '
                                         'created_at LIMIT 1', [session['player_id']])[0][0]
         d5 = db_connection.select_query('SELECT COUNT(*) - (SELECT COUNT(player_id) FROM Game WHERE player_id = ? '
-                                        'AND has_cheated = true) FROM Game WHERE player_id = ?', [session['player_id'], session['player_id']])[0][0]
-        return render_template('statistics.html', db_connection=db_connection, d1=d1, d2=d2, d3=d3, d4=d4)
+                                        'AND has_cheated = false) FROM Game WHERE player_id = ?', [session['player_id'], session['player_id']])[0][0]
+        return render_template('statistics.html', db_connection=db_connection, d1=d1, d2=d2, d3=d3, d4=d4, d5=d5)
     return render_template('login.html')
 
 if __name__ == '__main__':
