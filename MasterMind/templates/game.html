@@ -12,12 +12,21 @@
     {% if win %}
         <style>
             body {
-                background-image: url("https://lh3.googleusercontent.com/proxy/hPCK_ZUaFqwjsWOX7SjPDMSONTcvKNROBew39SaKclRO5HpgrwKYec1JZwB9zlvC_SEbw5w3Zc0hKpDt8Dj3UGYac7ySwKPvLrJjZvSYC_ZwVHkBCLC61XsyMUVaYQotqSLFFquGsHCPkIga")
+                background-image: url("https://jooinn.com/images/thumbs-up-20.png")
+            }
+            .container{
+                background-color: white;
             }
         </style>
-        <form method="post" action="/win/">
-            <button type="submit">Verder gaan</button>
-        </form>
+        <div class="container">
+            <div class="row d-flex justify-content-center" style="background-color: white">
+                <form method="post" action="/win/">
+                     <span class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary" style="width: 200px;">Ga Terug</button>
+                     </span>
+                </form>
+            </div>
+        </div>
     {% endif %}
     {% if not win %}
     <div class="container">

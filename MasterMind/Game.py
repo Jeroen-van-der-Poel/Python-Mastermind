@@ -29,12 +29,13 @@ class Game:
         if 4 <= amount <= 10:
             session['amount'] = amount
         if 6 <= color_amount <= 10:
-            session['color_amount'] = color_amount
-        if not color_amount >= amount:
-            session['color_amount'] = amount
+            if not color_amount >= amount:
+                session['color_amount'] = amount
+            else:
+                session['color_amount'] = color_amount
 
         answer.clear()
-        for i in range(color_amount):
+        for i in range(session['color_amount']):
             answer.append(Color(i).label)
             session['colors'] = answer
         if is_double:
