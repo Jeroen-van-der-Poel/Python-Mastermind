@@ -11,7 +11,6 @@ from db_connection import db_connection
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 app.logger.setLevel(logging.INFO)
-has_cheated = False
 
 @app.route('/')
 def home():
@@ -23,8 +22,11 @@ def login():
         return render_template('gamestart.html')
     if request.method == 'POST':
         username = request.form['user']
-        Player(username)
-        return render_template('gamestart.html')
+        if username == "":
+            return render_template('login.html')
+        else:
+            Player(username)
+            return render_template('gamestart.html')
     return render_template('login.html')
 
 
@@ -44,10 +46,11 @@ def gamestart():
         Player.begin_game()
         is_checked = request.form.get('doubles')
         cheat_on = request.form.get('cheat')
-        if(cheat_on):
+        has_cheated = False
+        if cheat_on:
             has_cheated = True
         session['answer'] = Game.generate_game(int(request.form['amount']), int(request.form['color_amount']), is_checked)
-        if(has_cheated):
+        if has_cheated:
             db_connection.query("UPDATE Game SET has_cheated = (?)" +
                                 "WHERE game_id = (?)", (True, session['game_id']))
         if 'tries' not in session:
@@ -73,8 +76,21 @@ def game():
             if str(this_try_correct[1]) == str(session['amount']):
                 session['win'] = True
                 return render_template('game.html', Color=Color, win=True)
-            return render_template('game.html', Color=Color, cheating=has_cheated)
-        return render_template('game.html', Color=Color, cheating=has_cheated)
+            return render_template('game.html', Color=Color)
+        return render_template('game.html', Color=Color)
+    return render_template('login.html')
+
+@app.route('/win/', methods=['POST'])
+def win():
+    if 'player' in session and 'game_id' in session:
+        if 'win' in session:
+            if session['win'] is True:
+                db_connection.query("UPDATE Game SET turns = (?)," +
+                                    "is_finished = (?)" +
+                                    "WHERE game_id = (?)", (session['attempts'], True, session['game_id']))
+                Game.clear_game()
+                return render_template('gamestart.html')
+    session.clear()
     return render_template('login.html')
 
 @app.route('/statistics/')
