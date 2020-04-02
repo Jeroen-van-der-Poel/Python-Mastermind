@@ -1,5 +1,13 @@
 {% extends "layout.html" %}
-{% block title %}{{ session['player'] }}{% endblock %}
+{% block title %}
+    <div class="container pt-3">
+        <div class="row d-flex justify-content-center">
+           <h4>Player: {{ session['player'] }}</h4>
+        </div>
+        <hr>
+    </div>
+{% endblock %}
+
 {% block body %}
     {% if win %}
         <style>
@@ -12,7 +20,9 @@
         </form>
     {% endif %}
     {% if not win %}
-        <div style="overflow-y: scroll; height:600px;">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div style="overflow-y: scroll; height:770px;">
             <table>
                 <tr>
                     {% for i in range(session['amount']) %}
@@ -31,7 +41,7 @@
                     <tr>
                         {% for j in i[0] %}
                             <td>
-                                <div style="background-color: {{ j }}" class="dot"></div style="background-color: {{ j }}">
+                                <div style="background-color: {{ j }}" class="dot"></div>
                                 <p></p>
                             </td>
                         {% endfor %}
@@ -61,7 +71,12 @@
                     {% endfor %}
                 </tr>
             </table>
-            <button type="submit">Checken</button>
+            <span class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary" id="checkbutton">Checken</button>
+            </span>
         </form>
+        </div>
+    </div>
+
     {% endif %}
 {% endblock %}

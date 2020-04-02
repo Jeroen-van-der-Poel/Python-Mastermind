@@ -39,13 +39,8 @@ table {
 }
 
 table td, table th {
-    border: 1px solid #ddd;
     padding: 8px;
     min-width: 100px;
-}
-
-table tr{
-    align-content: center;
 }
 
 table tr:nth-child(even) {
@@ -70,5 +65,17 @@ table th {
     border-radius: 50%;
     border: 1px solid black;
     left: 50%;
+}
+
+.dot2{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 1px solid black;
+    left: 50%;
+}
+
+#checkbutton{
+    width: 200px;
 }
 
