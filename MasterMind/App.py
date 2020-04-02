@@ -11,7 +11,7 @@ from db_connection import db_connection
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 app.logger.setLevel(logging.INFO)
-
+has_cheated = False
 
 @app.route('/')
 def home():
@@ -43,10 +43,16 @@ def gamestart():
         Game.clear_game()
         Player.begin_game()
         is_checked = request.form.get('doubles')
+        cheat_on = request.form.get('cheat')
+        if(cheat_on):
+            has_cheated = True
         session['answer'] = Game.generate_game(int(request.form['amount']), int(request.form['color_amount']), is_checked)
+        if(has_cheated):
+            db_connection.query("UPDATE Game SET has_cheated = (?)" +
+                                "WHERE game_id = (?)", (True, session['game_id']))
         if 'tries' not in session:
             session['tries'] = []
-        return render_template('game.html', Color=Color)
+        return render_template('game.html', Color=Color, cheating=has_cheated)
     return render_template('login.html')
 
 @app.route('/game/', methods=['GET', 'POST'])
@@ -67,8 +73,8 @@ def game():
             if str(this_try_correct[1]) == str(session['amount']):
                 session['win'] = True
                 return render_template('game.html', Color=Color, win=True)
-            return render_template('game.html', Color=Color)
-        return render_template('game.html', Color=Color)
+            return render_template('game.html', Color=Color, cheating=has_cheated)
+        return render_template('game.html', Color=Color, cheating=has_cheated)
     return render_template('login.html')
 
 @app.route('/statistics/')
@@ -80,6 +86,8 @@ def stats():
                                         'AND is_finished = true) FROM Game WHERE player_id = ?', [session['player_id'], session['player_id']])[0][0]
         d4 = db_connection.select_query('SELECT created_at FROM Game WHERE player_id = ? order by '
                                         'created_at LIMIT 1', [session['player_id']])[0][0]
+        d5 = db_connection.select_query('SELECT COUNT(*) - (SELECT COUNT(player_id) FROM Game WHERE player_id = ? '
+                                        'AND has_cheated = true) FROM Game WHERE player_id = ?', [session['player_id'], session['player_id']])[0][0]
         return render_template('statistics.html', db_connection=db_connection, d1=d1, d2=d2, d3=d3, d4=d4)
     return render_template('login.html')
 

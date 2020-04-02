@@ -16,7 +16,7 @@ class Game:
                                 'VALUES (?)', [player_id])
             result = db_connection.select_query('SELECT * FROM Game ' +
                                                 'WHERE player_id = ?' +
-                                                'ORDER BY created_at ' +
+                                                'ORDER BY created_at DESC ' +
                                                 'LIMIT 1', [player_id])
             session['game_id'] = result[0][0]
         else:
@@ -34,7 +34,6 @@ class Game:
             session['color_amount'] = amount
 
         answer.clear()
-
         for i in range(color_amount):
             answer.append(Color(i).label)
             session['colors'] = answer
@@ -81,6 +80,8 @@ class Game:
             session.pop('tries')
         if 'win' in session:
             session.pop('win')
+        if 'cheating' in session:
+            session.pop('cheating')
         if 'attempts' in session:
             session.pop('attempts')
 
