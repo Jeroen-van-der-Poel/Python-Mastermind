@@ -23,3 +23,40 @@ li a {
     flex-grow: 1;
 }
 
+form div {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+form button {
+    margin: 5px;
+}
+
+table {
+    font-family: Arial, serif;
+    border-collapse: collapse;
+}
+
+table td, table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    min-width: 100px;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table tr:hover {
+    background-color: #ddd;
+}
+
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+

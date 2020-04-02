@@ -65,25 +65,6 @@ class Game:
             i -= -1
             return correct_color, correct_place
 
-    @staticmethod
-    def clear_game():
-        if 'answer' in session:
-            session.pop('answer')
-        if 'amount' in session:
-            session.pop('amount')
-        if 'color_amount' in session:
-            session.pop('color_amount')
-        if 'game_id' in session:
-            session.pop('game_id')
-        if 'colors' in session:
-            session.pop('colors')
-        if 'tries' in session:
-            session.pop('tries')
-        if 'win' in session:
-            session.pop('win')
-        if 'attempts' in session:
-            session.pop('attempts')
-
 
 def random_color(colors: [], amount: int):
     answer = []

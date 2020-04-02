@@ -36,16 +36,38 @@ def logout():
 
 
 @app.route('/gamestart/', methods=['GET', 'POST'])
-def game():
+def gamestart():
     if request.method == 'GET' and 'player' in session:
         return render_template('gamestart.html')
     if request.method == 'POST' and 'player' in session:
-        Game.clear_game()
+        clear_game()
         Player.begin_game()
         is_checked = request.form.get('doubles')
         session['answer'] = Game.generate_game(int(request.form['amount']), int(request.form['color_amount']), is_checked)
         if 'tries' not in session:
             session['tries'] = []
+        return render_template('game.html', Color=Color)
+    return render_template('login.html')
+
+@app.route('/game/', methods=['GET', 'POST'])
+def game():
+    if 'player' in session and 'game_id' in session:
+        if 'tries' not in session:
+            session['tries'] = []
+        if request.method == 'POST':
+            if 'attempts' in session:
+                session['attempts'] -= -1
+            else:
+                session['attempts'] = 0
+            this_try = []
+            for i in range(session['amount']):
+                this_try.append(request.form[str(i)])
+            this_try_correct = Game.check_answer(this_try)
+            session['tries'].append([this_try, this_try_correct])
+            if str(this_try_correct[1]) == str(session['amount']):
+                session['win'] = True
+                return render_template('game.html', Color=Color, win=True)
+            return render_template('game.html', Color=Color)
         return render_template('game.html', Color=Color)
     return render_template('login.html')
 
@@ -61,6 +83,24 @@ def stats():
         return render_template('statistics.html', db_connection=db_connection, d1=d1, d2=d2, d3=d3, d4=d4)
     return render_template('login.html')
 
+
+def clear_game():
+    if 'answer' in session:
+        session.pop('answer')
+    if 'amount' in session:
+        session.pop('amount')
+    if 'color_amount' in session:
+        session.pop('color_amount')
+    if 'game_id' in session:
+        session.pop('game_id')
+    if 'colors' in session:
+        session.pop('colors')
+    if 'tries' in session:
+        session.pop('tries')
+    if 'win' in session:
+        session.pop('win')
+    if 'attempts' in session:
+        session.pop('attempts')
 
 if __name__ == '__main__':
     app.run()
