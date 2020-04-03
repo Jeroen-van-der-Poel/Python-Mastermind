@@ -47,6 +47,7 @@ def gamestart():
         is_checked = request.form.get('doubles')
         cheat_on = request.form.get('cheat')
         session['answer'] = Game.generate_game(int(request.form['amount']), int(request.form['color_amount']), is_checked)
+        session['is_cheated'] = False
         if cheat_on:
             session['is_cheated'] = True
             db_connection.query("UPDATE Game SET has_cheated = (?)" +
