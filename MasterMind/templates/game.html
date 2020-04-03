@@ -20,6 +20,7 @@
         </style>
         <div class="container">
             <div class="row d-flex justify-content-center" style="background-color: white">
+                <h2>Gewonnen</h2>
                 <form method="post" action="/win/">
                      <span class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary" style="width: 200px;">Ga Terug</button>
@@ -29,6 +30,7 @@
         </div>
     {% endif %}
     {% if not win %}
+
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div style="overflow-y: scroll; height:750px; width: 800px">
@@ -55,10 +57,10 @@
                         <td>
                             <div class="row">
                                 {% for u in range(i[1][0]) %}
-                                    <div style="background-color: white" class="dot2"></div>
+                                    <div style="background-color: white; border: 1px solid black; width: 20px; height: 20px; border-radius: 50%;" class="dot2"></div>
                                 {% endfor %}
-                                {% for u in range(i[1][1]) %}
-                                    <div style="background-color: black" class="dot2"></div>
+                                {% for w in range(i[1][1]) %}
+                                    <div style="background-color: black; border: 1px solid black; width: 20px; height: 20px; border-radius: 50%;" class="dot2"></div>
                                 {% endfor %}
                             </div>
                             <!--<p>{{ i[1][0] }}</p>-->

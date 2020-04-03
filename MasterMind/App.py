@@ -65,7 +65,7 @@ def game():
             session['tries'] = []
         if request.method == 'POST':
             if 'attempts' in session:
-                session['attempts'] -= -1
+                session['attempts'] += 1
             else:
                 session['attempts'] = 0
             this_try = []
@@ -76,6 +76,9 @@ def game():
             if str(this_try_correct[1]) == str(session['amount']):
                 session['win'] = True
                 return render_template('game.html', Color=Color, win=True)
+            if str(session['attempts']) == "10":
+                session['lose'] = True
+                return render_template('game.html', Color=Color, lose=True)
             return render_template('game.html', Color=Color)
         return render_template('game.html', Color=Color)
     return render_template('login.html')
@@ -88,6 +91,18 @@ def win():
                 db_connection.query("UPDATE Game SET turns = (?)," +
                                     "is_finished = (?)" +
                                     "WHERE game_id = (?)", (session['attempts'], True, session['game_id']))
+                Game.clear_game()
+                return render_template('gamestart.html')
+    session.clear()
+    return render_template('login.html')
+
+@app.route('/lose/', methods=['POST'])
+def lose():
+    if 'player' in session and 'game_id' in session:
+        if 'lose' in session:
+            if session['lose'] is True:
+                db_connection.query("UPDATE Game SET turns = (?)" +
+                                    "WHERE game_id = (?)", (session['attempts'], session['game_id']))
                 Game.clear_game()
                 return render_template('gamestart.html')
     session.clear()
