@@ -1,7 +1,7 @@
 import logging
 import os
 
-from flask import Flask, render_template, url_for, session, request, redirect
+from flask import Flask, render_template, url_for, session, request
 
 from Colors import Color
 from Game import Game

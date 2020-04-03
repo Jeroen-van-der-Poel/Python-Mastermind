@@ -5,7 +5,6 @@ from db_connection import db_connection
 from Colors import Color
 
 
-
 class Game:
     def __init__(self, player_id: int, newgame: bool):
         session['answer'] = []
@@ -81,6 +80,8 @@ class Game:
             session.pop('tries')
         if 'win' in session:
             session.pop('win')
+        if 'lose' in session:
+            session.pop('lose')
         if 'cheating' in session:
             session.pop('cheating')
         if 'attempts' in session:
