@@ -46,16 +46,14 @@ def gamestart():
         Player.begin_game()
         is_checked = request.form.get('doubles')
         cheat_on = request.form.get('cheat')
-        has_cheated = False
-        if cheat_on:
-            has_cheated = True
         session['answer'] = Game.generate_game(int(request.form['amount']), int(request.form['color_amount']), is_checked)
-        if has_cheated:
+        if cheat_on:
+            session['is_cheated'] = True
             db_connection.query("UPDATE Game SET has_cheated = (?)" +
                                 "WHERE game_id = (?)", (True, session['game_id']))
         if 'tries' not in session:
             session['tries'] = []
-        return render_template('game.html', Color=Color, cheating=has_cheated)
+        return render_template('game.html', Color=Color, cheating=session['is_cheated'])
     return render_template('login.html')
 
 @app.route('/game/', methods=['GET', 'POST'])
@@ -79,8 +77,8 @@ def game():
             if str(session['attempts']) == "10":
                 session['lose'] = True
                 return render_template('game.html', Color=Color, lose=True)
-            return render_template('game.html', Color=Color)
-        return render_template('game.html', Color=Color)
+            return render_template('game.html', Color=Color, cheating=session['is_cheated'])
+        return render_template('game.html', Color=Color, cheating=session['is_cheated'])
     return render_template('login.html')
 
 @app.route('/win/', methods=['POST'])
