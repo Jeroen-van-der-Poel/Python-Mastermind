@@ -20,7 +20,9 @@
         </style>
         <div class="container">
             <div class="row d-flex justify-content-center" style="background-color: white">
-                <h2>Gewonnen</h2>
+                <h2>Gefeliciteerd je hebt Gewonnen!</h2>
+            </div>
+            <div class="row d-flex justify-content-center" style="background-color: white">
                 <form method="post" action="/win/">
                      <span class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary" style="width: 200px;">Ga Terug</button>
@@ -40,7 +42,9 @@
         </style>
         <div class="container">
             <div class="row d-flex justify-content-center" style="background-color: white">
-                <h2>Verloren</h2>
+                <h2>Je hebt helaas verloren!</h2>
+            </div>
+            <div class="row d-flex justify-content-center" style="background-color: white">
                 <form method="post" action="/lose/">
                      <span class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary" style="width: 200px;">Ga Terug</button>
@@ -82,9 +86,7 @@
                                     <div style="background-color: black; border: 1px solid black; width: 20px; height: 20px; border-radius: 50%;" class="dot2"></div>
                                 {% endfor %}
                             </div>
-                            <!--<p>{{ i[1][0] }}</p>-->
                         </td>
-
                     </tr>
                 {% endfor %}
             </table>
