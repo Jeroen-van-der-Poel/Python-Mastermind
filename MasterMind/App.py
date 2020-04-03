@@ -65,7 +65,7 @@ def game():
             if 'attempts' in session:
                 session['attempts'] += 1
             else:
-                session['attempts'] = 0
+                session['attempts'] = 1
             this_try = []
             for i in range(session['amount']):
                 this_try.append(request.form[str(i)])
@@ -76,7 +76,7 @@ def game():
                 return render_template('game.html', Color=Color, win=True)
             if str(session['attempts']) == "10":
                 session['lose'] = True
-                return render_template('game.html', Color=Color, lose=True)
+                return render_template('game.html', Color=Color, win=False, lose=True)
             return render_template('game.html', Color=Color, cheating=session['is_cheated'])
         return render_template('game.html', Color=Color, cheating=session['is_cheated'])
     return render_template('login.html')
@@ -99,8 +99,9 @@ def lose():
     if 'player' in session and 'game_id' in session:
         if 'lose' in session:
             if session['lose'] is True:
-                db_connection.query("UPDATE Game SET turns = (?)" +
-                                    "WHERE game_id = (?)", (session['attempts'], session['game_id']))
+                db_connection.query("UPDATE Game SET turns = (?)," +
+                                    "is_finished = (?)" +
+                                    "WHERE game_id = (?)", (session['attempts'], False, session['game_id']))
                 Game.clear_game()
                 return render_template('gamestart.html')
     session.clear()

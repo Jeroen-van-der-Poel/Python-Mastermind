@@ -29,8 +29,27 @@
             </div>
         </div>
     {% endif %}
-    {% if not win %}
-
+    {% if not win and lose %}
+        <style>
+            body {
+                background-image: url("https://images.hdqwalls.com/download/game-over-typography-pic-1920x1080.jpg")
+            }
+            .container{
+                background-color: white;
+            }
+        </style>
+        <div class="container">
+            <div class="row d-flex justify-content-center" style="background-color: white">
+                <h2>Verloren</h2>
+                <form method="post" action="/lose/">
+                     <span class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary" style="width: 200px;">Ga Terug</button>
+                     </span>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+    {% if not win and not lose %}
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div style="overflow-y: scroll; height:750px; width: 800px">
@@ -59,7 +78,7 @@
                                 {% for u in range(i[1][0]) %}
                                     <div style="background-color: white; border: 1px solid black; width: 20px; height: 20px; border-radius: 50%;" class="dot2"></div>
                                 {% endfor %}
-                                {% for w in range(i[1][1]) %}
+                                {% for u in range(i[1][1]) %}
                                     <div style="background-color: black; border: 1px solid black; width: 20px; height: 20px; border-radius: 50%;" class="dot2"></div>
                                 {% endfor %}
                             </div>
